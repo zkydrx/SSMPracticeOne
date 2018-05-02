@@ -1,0 +1,13 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <!-- 商品管理的service -->
+    <bean id="itemsService" class="com.iot.learnssm.firstssm.service.impl.ItemsServiceImpl"/>
+
+     <!--用户管理的Service 要么在这里配置对应的service，要么使用注解在对应的Service的实现类中加上注解
+     @Service，二者必选其一，否则会报错。
+     主要思想就是所有的bean都要交给spring来处理，无论是以注解形式，还是以xml形式-->
+    <!--<bean id="userService" class="com.iot.learnssm.firstssm.service.impl.UserServiceImpl"/>-->
+
+</beans>
