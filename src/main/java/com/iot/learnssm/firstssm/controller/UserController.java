@@ -4,7 +4,10 @@ import com.iot.learnssm.firstssm.po.User;
 import com.iot.learnssm.firstssm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,12 +38,19 @@ public class UserController
         return modelAndView;
     }
 
-    @RequestMapping("/update")
-    public ModelAndView update(User user)
+    @RequestMapping("/editUser")
+    public ModelAndView editUser(Model model, @RequestParam(value = "id",required = true) Integer id)
     {
+        User user = userService.findUserById(id);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("user",user);
         modelAndView.setViewName("items/editUser");
         return modelAndView;
     }
+
+    public ModelAndView update(@ModelAttribute("user") User user,HttpServletRequest request)
+    {
+        return null;
+    }
+
 }

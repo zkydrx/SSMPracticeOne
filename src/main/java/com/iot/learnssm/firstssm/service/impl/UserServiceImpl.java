@@ -33,6 +33,18 @@ public class UserServiceImpl implements UserService
     }
 
     /**
+     * 根据用户id查找用户
+     *
+     * @param id
+     * @return
+     */
+    public User findUserById(Integer id)
+    {
+        User user = userMapper.selectByPrimaryKey(id);
+        return user;
+    }
+
+    /**
      * 根据用户名和密码查询用户
      *
      * @param user
@@ -73,6 +85,12 @@ public class UserServiceImpl implements UserService
      */
     public boolean updateUserById(User user)
     {
+        int i = userMapper.updateByPrimaryKey(user);
+        if(i > 0)
+        {
+            return true;
+        }
         return false;
     }
+
 }

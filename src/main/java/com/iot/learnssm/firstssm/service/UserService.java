@@ -22,6 +22,13 @@ public interface UserService
     List<User> findAllUserList();
 
     /**
+     * 根据用户id查找用户
+     * @param id
+     * @return
+     */
+    User findUserById(Integer id);
+
+    /**
      * 根据用户名和密码查询用户
      * @param user
      * @return
