@@ -15,8 +15,8 @@
 	由于Service中autowired 会报错
 	所以我们可以单独新建一个扫描包的路径
 	 -->
-    <context:component-scan base-package="com.iot.learnssm.firstssm"></context:component-scan>
-    <!--<context:component-scan base-package="com.iot.learnssm.firstssm.service"></context:component-scan>-->
+    <context:component-scan base-package="com.iot.learnssm.firstssm.controller"></context:component-scan>
+    <context:component-scan base-package="com.iot.learnssm.firstssm.service"></context:component-scan>
 
     <!-- 静态资源解析
         包括 ：js、css、img、..

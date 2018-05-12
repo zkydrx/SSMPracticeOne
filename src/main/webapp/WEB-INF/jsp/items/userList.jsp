@@ -16,7 +16,7 @@
 </head>
 <script type="text/javascript">
    function update() {
-        document.userForm.action = "${pageContext.request.contextPath}/user/update.action";
+        document.userForm.action = "${pageContext.request.contextPath}/user/editUser";
         document.userForm.submit();
     }
 </script>
