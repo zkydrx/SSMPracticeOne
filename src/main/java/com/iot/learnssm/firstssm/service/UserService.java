@@ -47,9 +47,15 @@ public interface UserService
      * @param user
      * @return
      */
-    boolean insertUser(User user);
+    int insertUser(User user);
 
 
+    /**
+     * 新增用户判断所填字符是否为空
+     * @param user
+     * @return
+     */
+    int insertSelective(User user);
     /**
      * 根据用户ID更新用户信息
      * @param user

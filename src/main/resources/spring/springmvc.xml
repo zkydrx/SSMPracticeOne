@@ -17,6 +17,7 @@
 	 -->
     <context:component-scan base-package="com.iot.learnssm.firstssm.controller"></context:component-scan>
     <context:component-scan base-package="com.iot.learnssm.firstssm.service"></context:component-scan>
+    <context:component-scan base-package="com.iot.learnssm.firstssm.mapper"></context:component-scan>
 
     <!-- 静态资源解析
         包括 ：js、css、img、..

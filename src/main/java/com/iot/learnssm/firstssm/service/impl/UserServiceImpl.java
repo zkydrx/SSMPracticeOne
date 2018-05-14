@@ -5,6 +5,7 @@ import com.iot.learnssm.firstssm.po.User;
 import com.iot.learnssm.firstssm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.handler.UserRoleAuthorizationInterceptor;
 
 import java.util.List;
 
@@ -72,9 +73,20 @@ public class UserServiceImpl implements UserService
      * @param user
      * @return
      */
-    public boolean insertUser(User user)
+    public int insertUser(User user)
     {
-        return false;
+        return userMapper.insert(user);
+    }
+
+    /**
+     * 新增用户判断所填字符是否为空
+     *
+     * @param user
+     * @return
+     */
+    public int insertSelective(User user)
+    {
+        return userMapper.insertSelective(user);
     }
 
     /**
