@@ -5,6 +5,12 @@
 <configuration>
 
     <!-- 全局setting配置，根据需要添加 -->
+    <properties>
+        <property name="dialect" value="mysql" />
+    </properties>
+    <settings>
+        <setting name="logImpl" value="LOG4J" />
+    </settings>
 
     <!-- 配置别名 -->
     <typeAliases>

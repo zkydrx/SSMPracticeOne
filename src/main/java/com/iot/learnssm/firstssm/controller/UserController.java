@@ -69,7 +69,7 @@ public class UserController
 
         int b = userService.insertSelective(user);
 
-        modelAndView.setViewName("jsp/login");
+        modelAndView.setViewName("login");
 
         return modelAndView;
     }
