@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="com.iot.learnssm.firstssm.po.User">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
         <result column="birthday" property="birthday" jdbcType="DATE"/>
         <result column="sex" property="sex" jdbcType="CHAR"/>
         <result column="address" property="address" jdbcType="VARCHAR"/>
@@ -67,7 +68,7 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        id, username, birthday, sex, address
+        id, username,password, birthday, sex, address
     </sql>
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.iot.learnssm.firstssm.po.UserExample">
         select
@@ -82,6 +83,16 @@
         <if test="orderByClause != null">
             order by ${orderByClause}
         </if>
+    </select>
+
+    <select id="selectByUsernameAndPassword" resultMap="BaseResultMap" parameterType="com.iot.learnssm.firstssm.po.User">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where
+        username=#{name,jdbcType=VARCHAR}
+        and
+        password=#{password,jdbcType=VARCHAR}
     </select>
 
     <select id="selectAllUser" resultMap="BaseResultMap" parameterType="com.iot.learnssm.firstssm.po.User">
@@ -112,9 +123,10 @@
         </if>
     </delete>
     <insert id="insert" parameterType="com.iot.learnssm.firstssm.po.User">
-        insert into user (id, username, birthday,
+        insert into user (id, username,password, birthday,
         sex, address)
-        values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE},
+        values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},
+        #{birthday,jdbcType=DATE},
         #{sex,jdbcType=CHAR}, #{address,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.iot.learnssm.firstssm.po.User">
@@ -125,6 +137,9 @@
             </if>
             <if test="username != null">
                 username,
+            </if>
+            <if test="password != null">
+                password,
             </if>
             <if test="birthday != null">
                 birthday,
@@ -142,6 +157,9 @@
             </if>
             <if test="username != null">
                 #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
             </if>
             <if test="birthday != null">
                 #{birthday,jdbcType=DATE},
@@ -169,6 +187,9 @@
             <if test="record.username != null">
                 username = #{record.username,jdbcType=VARCHAR},
             </if>
+            <if test="recode.password != null">
+                password = #{record.password,jdbcType=VARCHAR},
+            </if>
             <if test="record.birthday != null">
                 birthday = #{record.birthday,jdbcType=DATE},
             </if>
@@ -187,6 +208,7 @@
         update user
         set id = #{record.id,jdbcType=INTEGER},
         username = #{record.username,jdbcType=VARCHAR},
+        password = #{record.password,jdbcType=VARCHAR},
         birthday = #{record.birthday,jdbcType=DATE},
         sex = #{record.sex,jdbcType=CHAR},
         address = #{record.address,jdbcType=VARCHAR}
@@ -199,6 +221,9 @@
         <set>
             <if test="username != null">
                 username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
             </if>
             <if test="birthday != null">
                 birthday = #{birthday,jdbcType=DATE},
@@ -215,6 +240,7 @@
     <update id="updateByPrimaryKey" parameterType="com.iot.learnssm.firstssm.po.User">
         update user
         set username = #{username,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR},
         birthday = #{birthday,jdbcType=DATE},
         sex = #{sex,jdbcType=CHAR},
         address = #{address,jdbcType=VARCHAR}

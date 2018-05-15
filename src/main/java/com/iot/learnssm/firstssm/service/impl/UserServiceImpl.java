@@ -51,9 +51,9 @@ public class UserServiceImpl implements UserService
      * @param user
      * @return
      */
-    public boolean findUserByNameAndPassword(User user)
+    public int findUserByNameAndPassword(User user)
     {
-        return false;
+        return userMapper.selectByUsernameAndPassword(user);
     }
 
     /**

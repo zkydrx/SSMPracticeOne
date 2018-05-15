@@ -37,8 +37,6 @@ public class UserController
     {
         ModelAndView modelAndView =new ModelAndView();
         String name = request.getParameter("name");
-
-
         if(StringUtils.isNullOrEmpty(name))
         {
             modelAndView.addObject(name);
@@ -67,7 +65,18 @@ public class UserController
         user.setSex(sex);
         user.setAddress(address);
 
+        /**
+         * 检测注册用户是否可用
+         */
+        int userNumber = userService.findUserByNameAndPassword(user);
+
+        if(userNumber > 0)
+        {
+            return modelAndView.addObject("用户已存在，请使用一个新用户");
+        }
+
         int b = userService.insertSelective(user);
+
 
         modelAndView.setViewName("login");
 
@@ -97,8 +106,6 @@ public class UserController
 
     public ModelAndView update(@ModelAttribute("user") User user, HttpServletRequest request)
     {
-
-
         userService.insertUser(user);
         return null;
     }

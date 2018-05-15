@@ -33,7 +33,7 @@ public interface UserService
      * @param user
      * @return
      */
-    boolean findUserByNameAndPassword(User user);
+    int findUserByNameAndPassword(User user);
 
     /**
      * 根据用户ID删除用户
