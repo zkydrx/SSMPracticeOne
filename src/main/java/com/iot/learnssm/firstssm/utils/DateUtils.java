@@ -36,4 +36,16 @@ public class DateUtils
 
         return resultDate;
     }
+
+    /**
+     * 将日期转换成字符串形式
+     * @param date
+     * @return
+     */
+    public static String dateToString(Date date)
+    {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format = simpleDateFormat.format(date);
+        return format;
+    }
 }

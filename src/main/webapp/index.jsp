@@ -3,7 +3,7 @@
 <body>
 <h2>Hello World!</h2>
 
-<form id="register" action="/user/addUser" method="post">
+<form id="register" action="${pageContext.request.contextPath}/user/addUser" method="post">
     <table >
         <tr><td>姓名:</td><td><input type="text" id="name" name="name" value=""/></td></tr>
         <tr><td>密码:</td><td><input type="password" id="password" name="password" value=""/></td></tr>
