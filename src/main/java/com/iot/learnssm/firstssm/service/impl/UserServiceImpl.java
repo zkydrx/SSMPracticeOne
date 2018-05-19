@@ -5,7 +5,6 @@ import com.iot.learnssm.firstssm.po.User;
 import com.iot.learnssm.firstssm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.handler.UserRoleAuthorizationInterceptor;
 
 import java.util.List;
 
@@ -53,7 +52,16 @@ public class UserServiceImpl implements UserService
      */
     public int findUserByNameAndPassword(User user)
     {
-        return userMapper.selectByUsernameAndPassword(user);
+        User user1 = userMapper.selectByUsernameAndPassword(user);
+
+        if(user1 != null)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     /**

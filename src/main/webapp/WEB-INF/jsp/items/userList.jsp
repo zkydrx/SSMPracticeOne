@@ -15,20 +15,22 @@
     <title>用户列表</title>
 </head>
 <script type="text/javascript">
-   function update() {
-        document.userForm.action = "${pageContext.request.contextPath}/user/editUser";
+   function update(obj) {
+        document.userForm.action = "${pageContext.request.contextPath}/user/editUser"+"?id="+id;
+
         document.userForm.submit();
     }
 </script>
 <body>
 
 
-<form name="userForm" action="${pageContext.request.contextPath}/" method="post">
+<form name="userForm"  action="${pageContext.request.contextPath}/"  method="post">
     用户列表：
     <table width="100%" border="1">
         <tr>
             <td>用户id</td>
             <td>用户名</td>
+            <td>密码</td>
             <td>生日</td>
             <td>性别</td>
             <td>地址</td>
@@ -38,11 +40,13 @@
             <tr>
                 <td>${user.id}</td>
                 <td>${user.username}</td>
-                <td>${user.birthday}</td>
+                <td>${user.password}</td>
+                <%-- 页面对日起进行格式化--%>
+                <td><fmt:formatDate value="${user.birthday}" pattern="yyyy-mm-dd HH:mm:ss"></fmt:formatDate> </td>
                 <td>${user.sex}</td>
                 <td>${user.address}</td>
                 <td>
-                    <input type="button" name="" value="修改" onclick="update();"/>
+                    <input type="button" name="" value="修改" onclick="update(this);"/>
                 </td>
             </tr>
         </c:forEach>
