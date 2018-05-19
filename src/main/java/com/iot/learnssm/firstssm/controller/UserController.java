@@ -31,7 +31,6 @@ public class UserController
     @Autowired
     private UserService userService;
 
-
     @RequestMapping(value = "/addUser",method = RequestMethod.POST)
     public ModelAndView addUser(HttpServletRequest request)
     {
