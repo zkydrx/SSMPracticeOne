@@ -15,8 +15,33 @@
     <title>用户列表</title>
 </head>
 <script type="text/javascript">
-   function update(obj) {
-        document.userForm.action = "${pageContext.request.contextPath}/user/editUser"+"?id="+id;
+
+    // function getRowObj(obj) {
+    //     var i = 0;
+    //     while (obj.tagName.toLowerCase() != "tr") {
+    //         obj = obj.parentNode;
+    //         if (obj.tagName.toLowerCase() == "table")
+    //             return null;
+    //     }
+    //     return obj;
+    // }
+
+
+   function update() {
+       // var trObj = getRowObj(obj);
+       // var trArr = trObj.parentNode.children;
+       // for (var trNo = 0; trNo < trArr.length; trNo++) {
+       //     if (trObj == trObj.parentNode.children[trNo]) {
+       //         alert(trNo + 1);
+       //     }
+       // }
+
+       // 选中改行后提交进行修改，如何获取改行的用户id？
+       var obj = document.getElementById("id");
+       var id = obj.value();
+
+       alert("id"+id);
+        document.userForm.action = "${pageContext.request.contextPath}/user/editUser?id="+"${user.id}";
 
         document.userForm.submit();
     }
@@ -38,7 +63,7 @@
         </tr>
         <c:forEach items="${userList}" var="user">
             <tr>
-                <td>${user.id}</td>
+                <td ><input type="checkbox" name="id" id="id" value="${user.id}"/>${user.id}</td>
                 <td>${user.username}</td>
                 <td>${user.password}</td>
                 <%-- 页面对日起进行格式化--%>
@@ -46,7 +71,7 @@
                 <td>${user.sex}</td>
                 <td>${user.address}</td>
                 <td>
-                    <input type="button" name="" value="修改" onclick="update(this);"/>
+                    <input type="button" name="" value="修改" onclick="update();"/>
                 </td>
             </tr>
         </c:forEach>
