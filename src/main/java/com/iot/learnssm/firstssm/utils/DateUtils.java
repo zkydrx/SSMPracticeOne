@@ -23,7 +23,12 @@ public class DateUtils
     public static Date stringToDate(String date)
     {
         Date resultDate=new Date();
+        System.out.println(resultDate);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        if(date.length() == 10)
+        {
+            date = date + " 00:00:00";
+        }
         try
         {
             resultDate = simpleDateFormat.parse(date);
@@ -47,5 +52,10 @@ public class DateUtils
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String format = simpleDateFormat.format(date);
         return format;
+    }
+
+    public static void main(String[] args)
+    {
+        stringToDate("2018-05-02 12:12:21");
     }
 }

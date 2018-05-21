@@ -3,8 +3,10 @@ package com.iot.learnssm.firstssm.mapper;
 import com.iot.learnssm.firstssm.po.User;
 import com.iot.learnssm.firstssm.po.UserExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
+@Component
 public interface UserMapper
 {
     int countByExample(UserExample example);
@@ -21,7 +23,7 @@ public interface UserMapper
 
     User selectByPrimaryKey(Integer id);
 
-    int selectByUsernameAndPassword(User user);
+    User selectByUsernameAndPassword(User user);
 
     int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
 

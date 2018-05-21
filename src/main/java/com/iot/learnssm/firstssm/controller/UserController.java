@@ -31,7 +31,6 @@ public class UserController
     @Autowired
     private UserService userService;
 
-
     @RequestMapping(value = "/addUser",method = RequestMethod.POST)
     public ModelAndView addUser(HttpServletRequest request)
     {
@@ -40,6 +39,12 @@ public class UserController
         if(StringUtils.isNullOrEmpty(name))
         {
             modelAndView.addObject(name);
+        }
+
+        String password = request.getParameter("password");
+        if(StringUtils.isNullOrEmpty(password))
+        {
+            modelAndView.addObject(password);
         }
         String birthday = request.getParameter("birthday");
         if(StringUtils.isNullOrEmpty(birthday))
@@ -59,30 +64,56 @@ public class UserController
             modelAndView.addObject(address);
         }
 
+
         User user = new User();
         user.setUsername(name);
+        user.setPassword(password);
         user.setBirthday(date);
         user.setSex(sex);
         user.setAddress(address);
 
-//        /**
-//         * 检测注册用户是否可用
-//         */
-//        int userNumber = userService.findUserByNameAndPassword(user);
-//
-//        if(userNumber > 0)
-//        {
-//            return modelAndView.addObject("用户已存在，请使用一个新用户");
-//        }
+        /**
+         * 检测注册用户是否可用
+         */
+        int userNumber = userService.findUserByNameAndPassword(user);
+
+        if(userNumber > 0)
+        {
+            modelAndView.addObject("message","用户已存在，请使用一个新用户");
+            modelAndView.setViewName("error");
+            return modelAndView;
+        }
 
         int b = userService.insertSelective(user);
 
-
-        modelAndView.setViewName("login");
+        if(b > 0)
+        {
+            modelAndView.addObject("message","注册成功，请");
+            modelAndView.setViewName("success");
+            return modelAndView;
+        }
 
         return modelAndView;
     }
 
+    /**
+     * 跳转到登录页面
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/goLoginView",method = RequestMethod.POST)
+    public ModelAndView goLoginView(HttpServletRequest request)
+    {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("login");
+        return modelAndView;
+    }
+
+    /**
+     *
+     * @param request
+     * @return
+     */
     @RequestMapping("/queryUser")
     public ModelAndView queryUser(HttpServletRequest request)
     {

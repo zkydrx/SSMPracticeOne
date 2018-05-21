@@ -56,7 +56,8 @@ CREATE TABLE `orders` (
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(32) NOT NULL COMMENT '用户名称',
+  `username` varchar(100) NOT NULL COMMENT '用户名称',
+  `password` VARCHAR (100) not NULL comment '用户密码',
   `birthday` date DEFAULT NULL COMMENT '生日',
   `sex` char(1) DEFAULT NULL COMMENT '性别',
   `address` varchar(256) DEFAULT NULL COMMENT '地址',

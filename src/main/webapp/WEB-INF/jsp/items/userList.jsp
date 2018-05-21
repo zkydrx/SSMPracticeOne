@@ -15,20 +15,47 @@
     <title>用户列表</title>
 </head>
 <script type="text/javascript">
+
+    // function getRowObj(obj) {
+    //     var i = 0;
+    //     while (obj.tagName.toLowerCase() != "tr") {
+    //         obj = obj.parentNode;
+    //         if (obj.tagName.toLowerCase() == "table")
+    //             return null;
+    //     }
+    //     return obj;
+    // }
+
+
    function update() {
-        document.userForm.action = "${pageContext.request.contextPath}/user/editUser";
+       // var trObj = getRowObj(obj);
+       // var trArr = trObj.parentNode.children;
+       // for (var trNo = 0; trNo < trArr.length; trNo++) {
+       //     if (trObj == trObj.parentNode.children[trNo]) {
+       //         alert(trNo + 1);
+       //     }
+       // }
+
+       // 选中改行后提交进行修改，如何获取改行的用户id？
+       var obj = document.getElementById("id");
+       var id = obj.value();
+
+       alert("id"+id);
+        document.userForm.action = "${pageContext.request.contextPath}/user/editUser?id="+"${user.id}";
+
         document.userForm.submit();
     }
 </script>
 <body>
 
 
-<form name="userForm" action="${pageContext.request.contextPath}/" method="post">
+<form name="userForm"  action="${pageContext.request.contextPath}/"  method="post">
     用户列表：
     <table width="100%" border="1">
         <tr>
             <td>用户id</td>
             <td>用户名</td>
+            <td>密码</td>
             <td>生日</td>
             <td>性别</td>
             <td>地址</td>
@@ -36,9 +63,11 @@
         </tr>
         <c:forEach items="${userList}" var="user">
             <tr>
-                <td>${user.id}</td>
+                <td ><input type="checkbox" name="id" id="id" value="${user.id}"/>${user.id}</td>
                 <td>${user.username}</td>
-                <td>${user.birthday}</td>
+                <td>${user.password}</td>
+                <%-- 页面对日起进行格式化--%>
+                <td><fmt:formatDate value="${user.birthday}" pattern="yyyy-mm-dd HH:mm:ss"></fmt:formatDate> </td>
                 <td>${user.sex}</td>
                 <td>${user.address}</td>
                 <td>
