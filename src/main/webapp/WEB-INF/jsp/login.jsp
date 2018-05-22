@@ -12,29 +12,40 @@
 </head>
 <script type="text/javascript">
     function checkName() {
-        var name=$("#account_content").val();
-        if(name=="")
-        {
+        var name = $("#account_content").val();
+        if (name == "") {
             alert("Please input the name");
         }
-        if(name.length<6)
-        {
+        if (name.length < 6) {
             alert("The name length was shortter than six.");
         }
-        if(name.contains(Number))
-        {
+        if (name.contains(Number)) {
             alert("The name not contain the number.");
         }
     }
 </script>
+
 <body>
-<form action="${pageContext.request.contextPath }/login.action" method="post">
-    用户账号：<input type="text" name="username" id="account_content" onblur="checkName();"/><br/>
-    用户密码 ：<input type="password" name="password" id="password_content" onblur="checkPassword()"/><br/>
-    <input type="submit" value="登陆"/>
-
+<form action="${pageContext.request.contextPath }/login.action" method="post" style="align-content: center">
+    <table style="align-content: center; width: 600px;height: 300px;" border="1" >
+        <tr>
+            <td colspan="2">
+                <div style="color: red">${message}</div>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="用户账号：">用户账号:</label></td>
+            <td><input type="text" name="username" id="account_content" onblur="checkName();"/></td>
+        </tr>
+        <tr>
+            <td><label for="用户密码">用户密码:</label></td>
+            <td><input type="password" name="password" id="password_content" onblur="checkPassword()"/></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="登陆"/></td>
+        </tr>
+    </table>
 </form>
-
 
 </body>
 </html>
