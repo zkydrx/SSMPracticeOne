@@ -9,7 +9,6 @@
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
@@ -23,14 +22,15 @@
         <tr>
             <td>用户id</td>
             <td><input type="text" name = "id" value="${user.id}"/></td>
-
-
         </tr>
         <tr>
             <td>用户名</td>
             <td><input type="text" name="username" value="${user.username}"/> </td>
         </tr>
-
+        <tr>
+            <td>密码</td>
+            <td><input type="password" name="password" value="${user.password}"/></td>
+        </tr>
         <tr>
             <td>生日</td>
             <td>

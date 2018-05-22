@@ -125,20 +125,22 @@ public class UserController
         return modelAndView;
     }
 
-    @RequestMapping("/editUser")
-    public ModelAndView editUser(Model model, @RequestParam(value = "id",required = true) Integer id)
+    @RequestMapping(value = "/editUser",method = RequestMethod.POST)
+    public String editUser(Model model, @RequestParam(value = "id",required = true) Integer id)
     {
         User user = userService.findUserById(id);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("user",user);
         modelAndView.setViewName("items/editUser");
-        return modelAndView;
+        model.addAttribute("user",user);
+        return "items/editUser";
     }
 
-    public ModelAndView update(@ModelAttribute("user") User user, HttpServletRequest request)
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    public String update(@ModelAttribute("user") User user, HttpServletRequest request)
     {
-        userService.insertUser(user);
-        return null;
+        userService.updateUserById(user);
+        return "redirect:queryUser";
     }
 
 }
