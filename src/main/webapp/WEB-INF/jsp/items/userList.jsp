@@ -13,41 +13,66 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
     <title>用户列表</title>
-</head>
+    <script type="text/javascript" src="../../../js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 
-    function getRowObj(obj) {
-        while (obj.tagName.toLowerCase() != "tr") {
-            obj = obj.parentNode;
-            if (obj.tagName.toLowerCase() == "table")
-                return null;
-        }
-        return obj;
-    }
-
-
-   function update(obj) {
-       var trObj = getRowObj(obj);
-       alert(trObj);
-       var trArr = trObj.parentNode.children;
-       for (var trNo = 0; trNo < trArr.length; trNo++) {
-           if (trObj == trObj.parentNode.children[trNo]) {
-               trObj.childNodes.
-               alert(trNo + 1);
+   function update() {
+       var obj = document.getElementsByName('id');
+       var count = obj.length;
+       var j = 0;
+       var id ='';
+       alert("1");
+       alert("count:"+count);
+       for (var i = 0; i < count; i++)
+       {
+           if(obj[i].checked)
+           {
+                j++;
+                id=$(obj[i]).val();
            }
        }
 
-       // 选中改行后提交进行修改，如何获取改行的用户id？
-       //
-       // var obj = document.getElementById("id");
-       // var id = obj.value();
-       //
-       // alert("id"+id);
-        document.userForm.action = "${pageContext.request.contextPath}/user/editUser?id="+"${user.id}";
+       alert("id"+id);
+       if(j==0)
+       {
+           alert("请选择一条记录");
+           return false;
+       }
+       if(j>1)
+       {
+           alert("只能选择一条记录");
+           return false;
+       }
 
-        document.userForm.submit();
+       $.ajax({
+            url:"${pageContext.request.contextPath}/user/editUser",
+           data:{
+               id:id
+           },
+           type:"post"
+           // success:function(data){
+           //     if (data.result == 1) {
+           //         alert("修改成功");
+           //     }else{
+           //         alert("修改失败");
+           //
+           //     }
+           // }
+
+       });
+
+       // 选中改行后提交进行修改，如何获取改行的用户id？
+       <%--var obj = document.getElementById("id");--%>
+       <%--var id = obj.value();--%>
+
+       <%--alert("id"+id);--%>
+        <%--document.userForm.action = "?id="+"${user.id}";--%>
+
+        <%--document.userForm.submit();--%>
     }
 </script>
+
+</head>
 <body>
 
 
@@ -73,7 +98,7 @@
                 <td>${user.sex}</td>
                 <td>${user.address}</td>
                 <td>
-                    <input type="button" name="" value="修改" onclick="update(this);"/>
+                    <input type="button" name="" value="修改" onclick="update();"/>
                 </td>
             </tr>
         </c:forEach>
