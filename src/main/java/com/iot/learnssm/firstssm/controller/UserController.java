@@ -142,6 +142,12 @@ public class UserController
         return "items/editUser";
     }
 
+    /**
+     * 更新完成以后进行再查询，以展示修改后的数据
+     * @param user
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public String update(@ModelAttribute("user") User user, HttpServletRequest request)
     {
