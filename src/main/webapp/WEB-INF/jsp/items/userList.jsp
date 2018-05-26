@@ -98,7 +98,7 @@
                 <td>${user.sex}</td>
                 <td>${user.address}</td>
                 <td>
-                    <input type="button" name="" value="修改" onclick="update();"/>
+                    <input type="button" name="" value="修改" onclick="update(this);"/>
                 </td>
             </tr>
         </c:forEach>
