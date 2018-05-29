@@ -16,13 +16,15 @@
     <script type="text/javascript" src="../../../js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 
+    /**
+     * 第一种post提交方式
+     * @returns {boolean}
+     */
    function update() {
        var obj = document.getElementsByName('id');
        var count = obj.length;
        var j = 0;
        var id ='';
-       alert("1");
-       alert("count:"+count);
        for (var i = 0; i < count; i++)
        {
            if(obj[i].checked)
@@ -31,8 +33,6 @@
                 id=$(obj[i]).val();
            }
        }
-
-       alert("id"+id);
        if(j==0)
        {
            alert("请选择一条记录");
@@ -45,11 +45,11 @@
        }
 
        $.ajax({
-            url:"${pageContext.request.contextPath}/user/editUser",
+           url:"${pageContext.request.contextPath}/user/editUser",
            data:{
                id:id
            },
-           type:"post"
+           type:"get"
            // success:function(data){
            //     if (data.result == 1) {
            //         alert("修改成功");
@@ -69,6 +69,29 @@
         <%--document.userForm.action = "?id="+"${user.id}";--%>
 
         <%--document.userForm.submit();--%>
+    }
+
+
+    /**
+     * 第二种post提交方式使用a标签实现post提交
+     * @param url
+     * @param params
+     * @returns {HTMLFormElement}
+     */
+    function updateTwo(url, params) {
+        var temp = document.createElement("form");
+        temp.action = url;
+        temp.method = "post";
+        temp.style.display = "none";
+        for (var x in params) {
+            var opt = document.createElement("textarea");
+            opt.name = x;
+            opt.value = params[x];
+            temp.appendChild(opt);
+        }
+        document.body.appendChild(temp);
+        temp.submit();
+        return temp;
     }
 </script>
 
@@ -98,7 +121,9 @@
                 <td>${user.sex}</td>
                 <td>${user.address}</td>
                 <td>
-                    <input type="button" name="" value="修改" onclick="update();"/>
+                    <%--<input type="button" name="" value="修改" onclick="update();"/>--%>
+                    <a href="javascript:;"
+                       onclick="javascript:updateTwo('${pageContext.request.contextPath}/user/editUser',{id:${user.id}})">修改</a>
                 </td>
             </tr>
         </c:forEach>

@@ -11,12 +11,17 @@
     <title>成功提示</title>
 </head>
 <script type="text/javascript">
+    /**
+     * a 标签实现post提交
+     * @param url
+     * @param params
+     * @returns {HTMLFormElement}
+     */
     function goLogin(url, params) {
         var temp = document.createElement("form");
         temp.action = url;
         temp.method = "post";
         temp.style.display = "none";
-        alert("1");
         for (var x in params) {
             var opt = document.createElement("textarea");
             opt.name = x;
