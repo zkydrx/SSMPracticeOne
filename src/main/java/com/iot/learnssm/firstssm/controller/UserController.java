@@ -125,6 +125,12 @@ public class UserController
         return modelAndView;
     }
 
+    /**
+     * 跳转到编辑页面，并且把选中的数据在新页面展示
+     * @param model
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/editUser",method = RequestMethod.POST)
     public ModelAndView editUser(Model model, @RequestParam(value = "id",required = true) Integer id)
     {
@@ -137,6 +143,12 @@ public class UserController
     }
 
 
+    /**
+     * 更新完成以后进行再查询，以展示修改后的数据
+     * @param user
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public String update(@ModelAttribute("user") User user, HttpServletRequest request)
     {

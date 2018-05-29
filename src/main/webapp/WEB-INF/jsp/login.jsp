@@ -17,6 +17,7 @@
             alert("Please input the name");
         }
         if (name.length < 6) {
+
             alert("The name length was shortter than six.");
         }
         if (name.contains(Number)) {
@@ -26,23 +27,23 @@
 </script>
 
 <body>
-<form action="${pageContext.request.contextPath }/login.action" method="post" style="align-content: center">
-    <table style="align-content: center; width: 600px;height: 300px;" border="1" >
-        <tr>
+<form action="${pageContext.request.contextPath }/login.action" method="post">
+    <table style="align-content: center; width: 300px;height: 150px;" border="1" >
+        <tr >
             <td colspan="2">
                 <div style="color: red">${message}</div>
             </td>
         </tr>
-        <tr>
+        <tr style="align-content: center;">
             <td><label for="用户账号：">用户账号:</label></td>
             <td><input type="text" name="username" id="account_content" onblur="checkName();"/></td>
         </tr>
-        <tr>
+        <tr style="align-content: center;">
             <td><label for="用户密码">用户密码:</label></td>
             <td><input type="password" name="password" id="password_content" onblur="checkPassword()"/></td>
         </tr>
-        <tr>
-            <td colspan="2"><input type="submit" value="登陆"/></td>
+        <tr >
+            <td colspan="2" style="align-content: center;"><input type="submit" value="登陆"/></td>
         </tr>
     </table>
 </form>

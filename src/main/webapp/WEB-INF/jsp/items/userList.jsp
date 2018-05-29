@@ -45,11 +45,11 @@
        }
 
        $.ajax({
-           url:"${pageContext.request.contextPath}/user/editUser",
+            url:"${pageContext.request.contextPath}/user/editUser",
            data:{
                id:id
            },
-           type:"get"
+           type:"post"
            // success:function(data){
            //     if (data.result == 1) {
            //         alert("修改成功");
