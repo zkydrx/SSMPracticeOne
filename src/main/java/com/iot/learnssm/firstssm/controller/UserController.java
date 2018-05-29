@@ -158,4 +158,12 @@ public class UserController
         return "redirect:queryUser";
     }
 
+
+    @RequestMapping(value = "/goRegisterView",method = RequestMethod.POST)
+    public String goRegisterView()
+    {
+        return "";
+    }
+
+
 }
