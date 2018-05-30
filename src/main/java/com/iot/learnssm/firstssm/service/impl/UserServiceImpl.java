@@ -72,6 +72,11 @@ public class UserServiceImpl implements UserService
      */
     public boolean deleteById(User user)
     {
+        int i = userMapper.deleteByPrimaryKey(user.getId());
+        if(i >0)
+        {
+            return true;
+        }
         return false;
     }
 

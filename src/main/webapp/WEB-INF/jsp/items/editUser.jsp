@@ -34,7 +34,10 @@
         <tr>
             <td>生日</td>
             <td>
-                <input type="date" name="birthday" value="${user.birthday}"/>
+                <%--<input type="date" name="birthday" value="${user.birthday}"/>--%>
+                <input type="date" name="birthday" value="<fmt:formatDate value="${user.birthday}"
+                pattern="yyyy-MM-dd"/>">
+
             </td>
         </tr>
         <tr>

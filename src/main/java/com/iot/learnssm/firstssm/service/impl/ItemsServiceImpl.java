@@ -15,7 +15,8 @@ import java.util.List;
 /**
  * Created by Brian on 2016/3/3.
  */
-public class ItemsServiceImpl implements ItemsService {
+public class ItemsServiceImpl implements ItemsService
+{
 
     @Autowired
     private ItemsMapperCustom itemsMapperCustom;
@@ -23,13 +24,16 @@ public class ItemsServiceImpl implements ItemsService {
     @Autowired
     private ItemsMapper itemsMapper;
 
-    public List<ItemsCustom> findItemsList(ItemsQueryVo itemsQueryVo) throws Exception {
+    public List<ItemsCustom> findItemsList(ItemsQueryVo itemsQueryVo) throws Exception
+    {
         return itemsMapperCustom.findItemsList(itemsQueryVo);
     }
 
-    public ItemsCustom findItemsById(Integer id) throws Exception {
+    public ItemsCustom findItemsById(Integer id) throws Exception
+    {
         Items items = itemsMapper.selectByPrimaryKey(id);
-        if (items == null) {
+        if (items == null)
+        {
             throw new CustomException("修改的商品信息不存在!");
         }
         //中间对商品信息进行业务处理
@@ -37,7 +41,8 @@ public class ItemsServiceImpl implements ItemsService {
         //返回ItemsCustom
         ItemsCustom itemsCustom = null;
         //将items的属性值拷贝到itemsCustom
-        if (items != null) {
+        if (items != null)
+        {
             itemsCustom = new ItemsCustom();
             BeanUtils.copyProperties(items, itemsCustom);
         }
@@ -45,7 +50,8 @@ public class ItemsServiceImpl implements ItemsService {
         return itemsCustom;
     }
 
-    public void updateItems(Integer id, ItemsCustom itemsCustom) throws Exception {
+    public void updateItems(Integer id, ItemsCustom itemsCustom) throws Exception
+    {
         //添加业务校验，通常在service接口对关键参数进行校验
         //校验 id是否为空，如果为空抛出异常
 

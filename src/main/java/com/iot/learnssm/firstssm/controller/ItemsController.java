@@ -30,7 +30,8 @@ import javax.servlet.http.HttpServletRequest;
 //为了对url进行分类管理 ，可以在这里定义根路径，最终访问url是根路径+子路径
 //比如：商品列表：/items/queryItems.action
 @RequestMapping("/items")
-public class ItemsController {
+public class ItemsController
+{
 
     @Autowired
     private ItemsService itemsService;
@@ -38,7 +39,8 @@ public class ItemsController {
     // 商品分类
     //itemtypes表示最终将方法返回值放在request中的key
     @ModelAttribute("itemtypes")
-    public Map<String, String> getItemTypes() {
+    public Map<String, String> getItemTypes()
+    {
 
         Map<String, String> itemTypes = new HashMap<String, String>();
         itemTypes.put("101", "数码");
@@ -51,7 +53,8 @@ public class ItemsController {
     @RequestMapping("/queryItems")
     //实现 对queryItems方法和url进行映射，一个方法对应一个url
     //一般建议将url和方法写成一样
-    public ModelAndView queryItems(HttpServletRequest request, ItemsQueryVo itemsQueryVo) throws Exception {
+    public ModelAndView queryItems(HttpServletRequest request, ItemsQueryVo itemsQueryVo) throws Exception
+    {
         //测试forward后request是否可以共享
         //System.out.println(request.getParameter("id"));
 
@@ -97,7 +100,8 @@ public class ItemsController {
     //@RequestParam里边指定request传入参数名称和形参进行绑定。
     //通过required属性指定参数是否必须要传入
     //通过defaultValue可以设置默认值，如果id参数没有传入，将默认值和形参绑定。
-    public String editItems(Model model, @RequestParam(value = "id", required = true) Integer items_id) throws Exception {
+    public String editItems(Model model, @RequestParam(value = "id", required = true) Integer items_id) throws Exception
+    {
 
         //调用service根据商品id查询商品信息
         ItemsCustom itemsCustom = itemsService.findItemsById(items_id);
@@ -119,9 +123,9 @@ public class ItemsController {
     //@PathVariable中名称要和占位符一致，形参名无需和其一致
     //如果占位符中的名称和形参名一致，在@PathVariable可以不指定名称
     @RequestMapping("/itemsView/{id}")
-    public
-    @ResponseBody
-    ItemsCustom itemsView(@PathVariable("id") Integer items_id) throws Exception {
+    public @ResponseBody
+    ItemsCustom itemsView(@PathVariable("id") Integer items_id) throws Exception
+    {
 
         //调用service查询商品信息
         ItemsCustom itemsCustom = itemsService.findItemsById(items_id);
@@ -136,22 +140,23 @@ public class ItemsController {
     // 注意：@Validated和BindingResult bindingResult是配对出现，并且形参顺序是固定的（一前一后）。
     // value={ValidGroup1.class}指定使用ValidGroup1分组的校验
     @RequestMapping("/editItemsSubmit")
-    public String editItemsSubmit(
-            Model model,
-            HttpServletRequest request,
-            Integer id,
-            @ModelAttribute("items")
-            @Validated(value = ValidGroup1.class) ItemsCustom itemsCustom,
-            BindingResult bindingResult,
-            MultipartFile items_pic
-    ) throws Exception {
+    public String editItemsSubmit(Model model,
+                                  HttpServletRequest request,
+                                  Integer id,
+                                  @ModelAttribute("items") @Validated(value = ValidGroup1.class)
+                                          ItemsCustom itemsCustom,
+                                  BindingResult bindingResult,
+                                  MultipartFile items_pic) throws Exception
+    {
 
         //获取校验错误信息
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors())
+        {
             // 输出错误信息
             List<ObjectError> allErrors = bindingResult.getAllErrors();
 
-            for (ObjectError objectError : allErrors) {
+            for (ObjectError objectError : allErrors)
+            {
                 // 输出错误信息
                 System.out.println(objectError.getDefaultMessage());
             }
@@ -168,7 +173,8 @@ public class ItemsController {
         //原始名称
         String originalFilename = items_pic.getOriginalFilename();
         //上传图片
-        if (items_pic != null && originalFilename != null && originalFilename.length() > 0) {
+        if (items_pic != null && originalFilename != null && originalFilename.length() > 0)
+        {
 
             //存储图片的物理路径
             String pic_path = "D:\\tmp\\";
@@ -198,7 +204,8 @@ public class ItemsController {
 
     //商品信息修改提交
     //@RequestMapping("/editItemsSubmit")
-    //public ModelAndView editItemsSubmit(HttpServletRequest request, Integer id, ItemsCustom itemsCustom)throws Exception {
+    //public ModelAndView editItemsSubmit(HttpServletRequest request, Integer id, ItemsCustom itemsCustom)throws
+    // Exception {
     //
     //    //调用service更新商品信息，页面需要将商品信息传到此方法
     //    itemsService.updateItems(id, itemsCustom);
@@ -222,7 +229,8 @@ public class ItemsController {
 
     // 批量删除 商品信息
     @RequestMapping("/deleteItems")
-    public String deleteItems(Integer[] items_id) throws Exception {
+    public String deleteItems(Integer[] items_id) throws Exception
+    {
 
         // 调用service批量删除商品
         // ...
@@ -234,7 +242,8 @@ public class ItemsController {
 
     // 批量修改商品页面，将商品信息查询出来，在页面中可以编辑商品信息
     @RequestMapping("/editItemsQuery")
-    public ModelAndView editItemsQuery(HttpServletRequest request, ItemsQueryVo itemsQueryVo) throws Exception {
+    public ModelAndView editItemsQuery(HttpServletRequest request, ItemsQueryVo itemsQueryVo) throws Exception
+    {
 
         //调用service查找数据库，查询商品列表
         List<ItemsCustom> itemsList = itemsService.findItemsList(itemsQueryVo);
@@ -252,7 +261,8 @@ public class ItemsController {
     // 批量修改商品提交
     // 通过ItemsQueryVo接收批量提交的商品信息，将商品信息存储到itemsQueryVo中itemsList属性中。
     @RequestMapping("/editItemsAllSubmit")
-    public String editItemsAllSubmit(ItemsQueryVo itemsQueryVo) throws Exception {
+    public String editItemsAllSubmit(ItemsQueryVo itemsQueryVo) throws Exception
+    {
 
         return "success";
     }

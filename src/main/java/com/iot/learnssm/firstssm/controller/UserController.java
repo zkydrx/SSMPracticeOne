@@ -31,6 +31,11 @@ public class UserController
     @Autowired
     private UserService userService;
 
+    /**
+     * 注册用户
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/addUser",method = RequestMethod.POST)
     public ModelAndView addUser(HttpServletRequest request)
     {
@@ -110,7 +115,7 @@ public class UserController
     }
 
     /**
-     *
+     * 查询已注册的用户
      * @param request
      * @return
      */
@@ -145,24 +150,50 @@ public class UserController
 
     /**
      * 更新完成以后进行再查询，以展示修改后的数据
-     * @param user
      * @param request
      * @return
      */
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public String update(@ModelAttribute("user") User user, HttpServletRequest request)
     {
-        Object birthday = request.getAttribute("birthday");
-        System.out.println(birthday);
+//        User user = new User();
+//        String idTemp = request.getParameter("id");
+//        String username = request.getParameter("username");
+//        String password = request.getParameter("password");
+//        String birthday = request.getParameter("birthday");
+//        String sex = request.getParameter("sex");
+//        String address = request.getParameter("address");
+//
+//        int id = Integer.parseInt(idTemp);
+//
+//        Date date = DateUtils.stringToDate(birthday);
+//
+//        user.setId(id);
+//        user.setUsername(username);
+//        user.setPassword(password);
+//        user.setBirthday(date);
+//        user.setAddress(address);
+//        user.setSex(sex);
+
+
         boolean b = userService.updateUserById(user);
         return "redirect:queryUser";
     }
 
 
-    @RequestMapping(value = "/goRegisterView",method = RequestMethod.POST)
-    public String goRegisterView()
+    /**
+     * 删除用户
+     * @param id
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/deleteUser",method = RequestMethod.POST)
+    public String deleteUser(@RequestParam("id") int id,HttpServletRequest request)
     {
-        return "";
+        User user = new User();
+        user.setId(id);
+        userService.deleteById(user);
+        return "redirect:queryUser";
     }
 
 

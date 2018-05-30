@@ -14,7 +14,8 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
     <title>用户列表</title>
     <script type="text/javascript" src="../../../js/jquery-3.3.1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../../../css/common.css" />
+    <%--<link rel="stylesheet" type="text/css" href="../../../css/common.css" />--%>
+    <link href="../../../css/common.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">
 
     /**
@@ -95,6 +96,23 @@
         return temp;
     }
 
+    function deleteUser(url,params) {
+        var del = document.createElement("form");
+        del.action = url;
+        del.method = "post";
+        del.style.display = "none";
+        for(var i in params)
+        {
+            var obj = document.createElement("textarea");
+            obj.name = i;
+            obj.value = params[i];
+            del.appendChild(obj)
+        }
+        document.body.appendChild(del);
+        del.submit();
+        return del;
+    }
+    
 
 
     function startTime()
@@ -133,7 +151,23 @@
 </script>
 
     <style type="text/css">
+        #nowDateTimeSpan{
+            color: #cc3e00;
+        }
+        label {
+            color: #9794ee;
+        }
+        table {
+            border-color: #1a25cc;
+            color:#ad11cc;
+            cellspacing: 0px;
+            width: 100%;
+            border-style: solid;
 
+        }
+        a {
+            color: #ad11cc
+        }
     </style>
 
 </head>
@@ -144,10 +178,12 @@
     <label >用户列表：</label>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <label><a href="${pageContext.request.contextPath}/index.jsp">去首页</a></label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
     <label >当前时间：</label><span  id="nowDateTimeSpan"></span>
 
@@ -172,15 +208,18 @@
                 </td>
                 <%-- 页面对日起进行格式化--%>
                 <td>
-                    <input type="date" name="birthday" value="<fmt:formatDate value='${user.birthday}'
-                    pattern='yyyy-mm-dd HH:mm:ss'/>">
-                     </td>
+                    <%--<input type="date" name="birthday" value="${user.birthday}"/>--%>
+                    <fmt:formatDate value="${user.birthday}" pattern="yyyy-MM-dd"/>
+                </td>
                 <td>${user.sex}</td>
                 <td>${user.address}</td>
                 <td>
                     <%--<input type="button" name="" value="修改" onclick="update();"/>--%>
-                    <a href="javascript:;" style="color: #ad11cc"
+                    <a href="javascript:;"
                        onclick="javascript:updateTwo('${pageContext.request.contextPath}/user/editUser',{id:${user.id}})">修改</a>
+                    <a href="javascript:;"
+                       onclick="deleteUser('${pageContext.request.contextPath}/user/deleteUser',{id:${user.id}});">删除
+                    </a>
                 </td>
             </tr>
         </c:forEach>
