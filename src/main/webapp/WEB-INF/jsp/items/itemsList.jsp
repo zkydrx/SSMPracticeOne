@@ -21,17 +21,17 @@
     </script>
 </head>
 <body>
-当前用户：${username }，
+<label>当前用户：</label>${username }，
 <c:if test="${username!=null }">
     <a href="${pageContext.request.contextPath }/logout.action">退出</a>
 </c:if>
 <form name="itemsForm" action="${pageContext.request.contextPath }/items/queryItems.action" method="post">
-    查询条件：
-    <table width="100%" border=1>
+    <label>查询条件：</label>
+    <table width="100%" cellspacing="0" border="1">
         <tr>
             <td>
-                商品名称：<input name="itemsCustom.name"/>
-                商品类型：
+                <label>商品名称：</label><input name="itemsCustom.name"/>
+                <label>商品类型：</label>
                 <select name="itemtype">
                     <c:forEach items="${itemtypes}" var="itemtype">
                         <option value="${itemtype.key }">${itemtype.value }</option>
@@ -44,8 +44,8 @@
             </td>
         </tr>
     </table>
-    商品列表：
-    <table width="100%" border=1>
+    <label>商品列表：</label>
+    <table width="100%" border="1" cellspacing="0">
         <tr>
             <td>选择</td>
             <td>商品名称</td>
