@@ -18,12 +18,19 @@
             document.itemsForm.action = "${pageContext.request.contextPath }/items/queryItems.action";
             document.itemsForm.submit();
         }
+
+
+        function loGout() {
+            window.location.href="${pageContext.request.contextPath }/logout.action";
+
+        }
     </script>
 </head>
 <body>
 <label>当前用户：</label>${username }，
 <c:if test="${username!=null }">
-    <a href="${pageContext.request.contextPath }/logout.action">退出</a>
+    <input type="button" onclick="loGout();" value="退出"/>
+    <%--<a href="${pageContext.request.contextPath }/logout.action">退出</a>--%>
 </c:if>
 <form name="itemsForm" action="${pageContext.request.contextPath }/items/queryItems.action" method="post">
     <label>查询条件：</label>
