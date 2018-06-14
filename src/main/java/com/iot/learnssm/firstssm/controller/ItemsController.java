@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by brian on 2016/3/2.
@@ -229,14 +230,12 @@ public class ItemsController
 
     // 批量删除 商品信息
     @RequestMapping("/deleteItems")
-    public String deleteItems(Integer[] items_id) throws Exception
+    public String deleteItems(Integer id) throws Exception
     {
-
         // 调用service批量删除商品
         // ...
-        System.out.println(items_id);
-
-        return "success";
+        int result = itemsService.delete(id);
+        return "forward:queryItems.action";
 
     }
 
@@ -265,6 +264,19 @@ public class ItemsController
     {
 
         return "success";
+    }
+
+
+    /**
+     * 跳转到添加商品页面
+     * @return
+     */
+    @RequestMapping(value = "/viewAddItem",method = RequestMethod.POST)
+    public ModelAndView viewAddItem(HttpServletRequest request, HttpServletResponse response)
+    {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ietms/addItems");
+        return modelAndView;
     }
 
 }

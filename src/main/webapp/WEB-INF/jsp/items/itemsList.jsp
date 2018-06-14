@@ -20,14 +20,31 @@
         }
 
 
-        function loGout() {
+        function loGout()
+        {
             window.location.href="${pageContext.request.contextPath }/logout.action";
+        }
 
+
+        function editItems(id)
+        {
+            window.location.href = "${pageContext.request.contextPath}/items/editItems.action?id="+id;
+        }
+
+
+        function deleteOneItem(id) {
+            document.itemsForm.action= "${pageContext.request.contextPath}/items/deleteItems.action?id="+id;
+            document.itemsForm.submit();
+        }
+
+        function addOneItem(){
+            document.itemsForm.action = "${pageContext.request.contextPath}/items/viewAddItem.action";
+            document.itemsForm.submit();
         }
     </script>
 </head>
 <body>
-<label>当前用户：</label>${username }，
+<label>当前用户：</label><input type="text" value="${username}" style="border-style:none;width: 30px;" readonly/>，
 <c:if test="${username!=null }">
     <input type="button" onclick="loGout();" value="退出"/>
     <%--<a href="${pageContext.request.contextPath }/logout.action">退出</a>--%>
@@ -69,7 +86,11 @@
                 <td><fmt:formatDate value="${item.createtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 <td>${item.detail }</td>
 
-                <td><a href="${pageContext.request.contextPath }/items/editItems.action?id=${item.id}">修改</a></td>
+                <td>
+                    <input type="button" onclick="editItems(${item.id});" value="modify">
+                    <input type="button" onclick="deleteOneItem(${item.id});" value="delete">
+                    <input type="button" onclick="addOneItem();" value="addItem">
+                </td>
 
             </tr>
         </c:forEach>

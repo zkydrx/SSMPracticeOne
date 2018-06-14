@@ -60,4 +60,10 @@ public class ItemsServiceImpl implements ItemsService
         itemsCustom.setId(id);
         itemsMapper.updateByPrimaryKeyWithBLOBs(itemsCustom);
     }
+
+    public int delete(Integer id)
+    {
+
+        return itemsMapper.deleteByPrimaryKey(id);
+    }
 }

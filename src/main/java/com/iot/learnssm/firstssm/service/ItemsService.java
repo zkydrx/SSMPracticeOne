@@ -2,13 +2,14 @@ package com.iot.learnssm.firstssm.service;
 
 import com.iot.learnssm.firstssm.po.ItemsCustom;
 import com.iot.learnssm.firstssm.po.ItemsQueryVo;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by Brian on 2016/3/3.
  */
-//@Service
+@Service
 public interface ItemsService {
     //商品查询列表
     List<ItemsCustom> findItemsList(ItemsQueryVo itemsQueryVo) throws Exception;
@@ -37,4 +38,7 @@ public interface ItemsService {
      */
     void updateItems(Integer id, ItemsCustom itemsCustom) throws Exception;
 
+
+
+    int delete(Integer id);
 }
