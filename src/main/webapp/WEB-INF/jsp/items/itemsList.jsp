@@ -41,14 +41,20 @@
             document.itemsForm.action = "${pageContext.request.contextPath}/items/viewAddItem.action";
             document.itemsForm.submit();
         }
+
+        function queryUser() {
+            window.location.href="${pageContext.request.contextPath}/user/queryUser"
+        }
     </script>
 </head>
 <body>
-<label>当前用户：</label><input type="text" value="${username}" style="border-style:none;width: 30px;" readonly/>，
+<label>当前用户：</label><input type="text" value="${username}" style="border-style:none;width: 60px;" readonly/>，
 <c:if test="${username!=null }">
     <input type="button" onclick="loGout();" value="退出"/>
     <%--<a href="${pageContext.request.contextPath }/logout.action">退出</a>--%>
 </c:if>
+
+<input type="button" onclick="javascript:queryUser();" value="用户管理"  style="text-align: right;"/>
 <form name="itemsForm" action="${pageContext.request.contextPath }/items/queryItems.action" method="post">
     <label>查询条件：</label>
     <table width="100%" cellspacing="0" border="1">

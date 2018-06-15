@@ -35,6 +35,7 @@ public class LoginController
         {
             //在session中保存用户身份信息
             session.setAttribute("username", username);
+            session.setAttribute("password", password);
             model.addAttribute("message","登陆成功");
             return "redirect:/items/queryItems.action";
         }
