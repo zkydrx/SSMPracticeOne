@@ -74,6 +74,14 @@
     }
 
 
+    function goLoginOne() {
+       document.userForm.method="post";
+        document.userForm.action =
+            "${pageContext.request.contextPath}/login.action?username="+"${pageContext.request.getSession(true).getAttribute("username")}"+"&password" +
+            "="+"${pageContext.request.getSession(true).getAttribute("password")}";
+        document.userForm.submit();
+    }
+
     /**
      * 第二种post提交方式使用a标签实现post提交
      * @param url
@@ -112,7 +120,7 @@
         del.submit();
         return del;
     }
-    
+
 
 
     function startTime()
@@ -151,12 +159,7 @@
 
 
 
-    function login() {
-        var username = ${pageContext.request.getSession(true).getAttribute("username")};
-        var password = ${pageContext.request.getSession(true).getAttribute("password")};
-        window.location.href =
-            "${pageContext.request.contextPath}/login.action?username="+username+"&password="+password;
-    }
+
 </script>
 
     <style type="text/css">
@@ -177,9 +180,6 @@
         a {
             color: #ad11cc
         }
-
-
-
     </style>
 
 </head>
@@ -196,18 +196,22 @@
 
     <input type="text" value="${pageContext.request.getSession(true).getAttribute("username")},,
     ,<%=request.getSession().getAttribute("username")%>,<%=request.getSession().getAttribute("password")%>">
-    <a href="javascript:;"
-       onclick="javascript:goLogin('${pageContext.request.contextPath}/login.action',
-               {username:${pageContext.request.getSession(true).getAttribute("username")};password
-               :${pageContext.request.getSession(true).getAttribute("password")})">GoodsManage
-    </a>
-    <input type="button" onclick="javascript:login();" value="GoodsManage">
+    <%-- TODO 解决跳转的乱码问题，以及password 存入session的问题--%>
+    <a charset="utf-8" href="${pageContext.request.contextPath}/login.action?username=${username}&password=${password}"
+    >GoodsManage</a>
+    <%-- TODO 解决跳转的乱码问题，以及password 存入session的问题--%>
+    <input type="button" onclick="goLoginOne()" value="MangeGoodsOne"/>
+
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
     <label >当前时间：</label><span  id="nowDateTimeSpan"></span>
+
+    <input type="text" value="${username},${passowrd}">
+    <input type="button" onclick="aalogin();" value="GoodsManage"/>
+
 
     <table width="100%" border="1" cellspacing="0" style="border-color: #1a25cc;color: #ad11cc;">
         <tr>

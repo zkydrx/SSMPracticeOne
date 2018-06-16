@@ -125,6 +125,11 @@ public class UserController
         List<User> userList = userService.findAllUserList();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("userList",userList);
+        String username = (String) request.getSession().getAttribute("username");
+        String password = (String) request.getSession().getAttribute("password");
+
+        modelAndView.addObject("username",username);
+        modelAndView.addObject("passowrd",password);
 
         modelAndView.setViewName("items/userList");
         return modelAndView;

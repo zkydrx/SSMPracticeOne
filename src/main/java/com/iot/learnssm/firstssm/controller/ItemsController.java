@@ -269,6 +269,7 @@ public class ItemsController
 
     /**
      * 跳转到添加商品页面
+     * TODO 这个功能还没有做成功，不能跳转到新加页面，目前还没有查明原因。待解决。
      * @return
      */
     @RequestMapping(value = "/viewAddItem",method = RequestMethod.POST)
