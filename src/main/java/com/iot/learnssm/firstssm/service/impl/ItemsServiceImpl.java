@@ -24,6 +24,11 @@ public class ItemsServiceImpl implements ItemsService
     @Autowired
     private ItemsMapper itemsMapper;
 
+    public int insertItmes(Items items)
+    {
+        return itemsMapper.insert(items);
+    }
+
     public List<ItemsCustom> findItemsList(ItemsQueryVo itemsQueryVo) throws Exception
     {
         return itemsMapperCustom.findItemsList(itemsQueryVo);

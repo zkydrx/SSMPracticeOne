@@ -1,6 +1,7 @@
 package com.iot.learnssm.firstssm.controller;
 
 import com.iot.learnssm.firstssm.controller.converter.validation.ValidGroup1;
+import com.iot.learnssm.firstssm.po.Items;
 import com.iot.learnssm.firstssm.po.ItemsCustom;
 import com.iot.learnssm.firstssm.po.ItemsQueryVo;
 import com.iot.learnssm.firstssm.service.ItemsService;
@@ -276,8 +277,21 @@ public class ItemsController
     public ModelAndView viewAddItem(HttpServletRequest request, HttpServletResponse response)
     {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("ietms/addItems");
+        modelAndView.setViewName("items/addItems");
         return modelAndView;
+    }
+
+
+    @RequestMapping(value = "/addItem",method = RequestMethod.POST)
+    public String addItem(HttpServletRequest request, HttpServletResponse response, Items items)
+    {
+        if(items!=null)
+        {
+            itemsService.insertItmes(items);
+        }
+
+
+        return "redirect:queryItems.action";
     }
 
 }

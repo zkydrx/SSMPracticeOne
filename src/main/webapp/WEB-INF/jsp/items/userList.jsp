@@ -77,8 +77,7 @@
     function goLoginOne() {
        document.userForm.method="post";
         document.userForm.action =
-            "${pageContext.request.contextPath}/login.action?username="+"${pageContext.request.getSession(true).getAttribute("username")}"+"&password" +
-            "="+"${pageContext.request.getSession(true).getAttribute("password")}";
+            "${pageContext.request.contextPath}/login.action?username="+"<%=request.getSession().getAttribute("usernameForCurrentLogin")%>"+"&password="+"<%=request.getSession().getAttribute("passwordForCurrentUser")%>";
         document.userForm.submit();
     }
 
@@ -194,10 +193,10 @@
     <label><a href="${pageContext.request.contextPath}/index.jsp">去首页</a></label>
 
 
-    <input type="text" value="${pageContext.request.getSession(true).getAttribute("username")},,
-    ,<%=request.getSession().getAttribute("username")%>,<%=request.getSession().getAttribute("password")%>">
+    <%--<input type="text" value="${pageContext.request.getSession(true).getAttribute("username")},,--%>
+    <%--,<%=request.getSession().getAttribute("username")%>,<%=request.getSession().getAttribute("password")%>">--%>
     <%-- TODO 解决跳转的乱码问题，以及password 存入session的问题--%>
-    <a charset="utf-8" href="${pageContext.request.contextPath}/login.action?username=${username}&password=${password}"
+    <a charset="utf-8" href="${pageContext.request.contextPath}/login.action?username=${usernameForCurrentLogin}&password=${passwordForCurrentUser}"
     >GoodsManage</a>
     <%-- TODO 解决跳转的乱码问题，以及password 存入session的问题--%>
     <input type="button" onclick="goLoginOne()" value="MangeGoodsOne"/>
@@ -209,8 +208,8 @@
 
     <label >当前时间：</label><span  id="nowDateTimeSpan"></span>
 
-    <input type="text" value="${username},${passowrd}">
-    <input type="button" onclick="aalogin();" value="GoodsManage"/>
+    <%--<input type="text" value="${username},${passowrd}">--%>
+    <%--<input type="button" onclick="aalogin();" value="GoodsManage"/>--%>
 
 
     <table width="100%" border="1" cellspacing="0" style="border-color: #1a25cc;color: #ad11cc;">
@@ -230,7 +229,10 @@
                 <%--<td ><input type="checkbox" name="id" id="id" value="${user.id}"/>${user.id}</td>--%>
                 <td>${user.username}</td>
                 <td>
-                    <input type="password" name="password" value="${user.password}">
+                    <%--如果使用input 输入框提交时如果name 字段有值的话，会随着一起提交到控制层，这样就不是我们希望的结果
+                    就会导致错误，所以，如果用input输入框来回显结果的话就不要给会改input的name属性，以免在后边提交的时候不小心给提交了--%>
+                    <%--<input type="password" name="password" value="${user.password}">--%>
+                        ${user.password}
                 </td>
                 <%-- 页面对日起进行格式化--%>
                 <td>
