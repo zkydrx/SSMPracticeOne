@@ -4,7 +4,9 @@ import com.iot.learnssm.firstssm.controller.converter.validation.ValidGroup1;
 import com.iot.learnssm.firstssm.po.Items;
 import com.iot.learnssm.firstssm.po.ItemsCustom;
 import com.iot.learnssm.firstssm.po.ItemsQueryVo;
+import com.iot.learnssm.firstssm.po.Orderdetail;
 import com.iot.learnssm.firstssm.service.ItemsService;
+import com.iot.learnssm.firstssm.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +39,8 @@ public class ItemsController
 
     @Autowired
     private ItemsService itemsService;
+    @Autowired
+    private OrderService orderService;
 
     // 商品分类
     //itemtypes表示最终将方法返回值放在request中的key
@@ -236,6 +240,16 @@ public class ItemsController
         // 调用service批量删除商品
         // ...
         int result = itemsService.delete(id);
+        List<Orderdetail> orderdetails =
+                orderService.selectOrderDetails(id);
+        if (orderdetails != null)
+        {
+            for (Orderdetail orderdetail : orderdetails)
+            {
+                orderService.delete(orderdetail.getId());
+            }
+        }
+
         return "forward:queryItems.action";
 
     }

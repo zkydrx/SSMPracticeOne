@@ -193,4 +193,10 @@
         items_num = #{itemsNum,jdbcType=INTEGER}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT 
+        <include refid="Base_Column_List"/>
+        from orderdetail
+        where items_id = #{itemsId,jdbcType=INTEGER}
+    </select>
 </mapper>

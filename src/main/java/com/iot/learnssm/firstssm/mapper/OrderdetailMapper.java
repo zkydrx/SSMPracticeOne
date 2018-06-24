@@ -28,4 +28,7 @@ public interface OrderdetailMapper {
     int updateByPrimaryKeySelective(Orderdetail record);
 
     int updateByPrimaryKey(Orderdetail record);
+
+    List<Orderdetail> selectById(Integer id);
+
 }
