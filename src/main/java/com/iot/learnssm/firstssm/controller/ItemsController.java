@@ -73,7 +73,7 @@ public class ItemsController
         //modelAndView.setViewName("/WEB-INF/jsp/items/itemsList.jsp");
         //下边的路径配置就可以不在程序中指定jsp路径的前缀和后缀
         modelAndView.setViewName("items/itemsList");
-
+        modelAndView.addObject("username",request.getSession().getAttribute("usernameForCurrentLogin"));
         return modelAndView;
     }
 
