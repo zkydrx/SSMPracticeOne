@@ -4,6 +4,7 @@ import com.iot.learnssm.firstssm.mapper.OrderdetailMapper;
 import com.iot.learnssm.firstssm.po.Orderdetail;
 import com.iot.learnssm.firstssm.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * Time: 01:47:08
  * Description:
  */
+@Service
 public class OrderServiceImpl implements OrderService
 {
 

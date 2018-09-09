@@ -3,10 +3,10 @@ package com.iot.learnssm.firstssm.controller;
 import com.iot.learnssm.firstssm.po.User;
 import com.iot.learnssm.firstssm.service.UserService;
 import com.iot.learnssm.firstssm.utils.DateUtils;
-import com.iot.learnssm.firstssm.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,30 +41,30 @@ public class UserController
     {
         ModelAndView modelAndView =new ModelAndView();
         String name = request.getParameter("name");
-        if(StringUtils.isNullOrEmpty(name))
+        if(StringUtils.isEmpty(name))
         {
             modelAndView.addObject(name);
         }
 
         String password = request.getParameter("password");
-        if(StringUtils.isNullOrEmpty(password))
+        if(StringUtils.isEmpty(password))
         {
             modelAndView.addObject(password);
         }
         String birthday = request.getParameter("birthday");
-        if(StringUtils.isNullOrEmpty(birthday))
+        if(StringUtils.isEmpty(birthday))
         {
             modelAndView.addObject(birthday);
         }
         Date date = DateUtils.stringToDate(birthday);
         String sex = request.getParameter("sex");
-        if(StringUtils.isNullOrEmpty(sex))
+        if(StringUtils.isEmpty(sex))
         {
             modelAndView.addObject(sex);
         }
         String address = request.getParameter("address");
 
-        if(StringUtils.isNullOrEmpty(address))
+        if(StringUtils.isEmpty(address))
         {
             modelAndView.addObject(address);
         }

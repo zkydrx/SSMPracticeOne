@@ -51,6 +51,9 @@ public class ItemsController
         Map<String, String> itemTypes = new HashMap<String, String>();
         itemTypes.put("101", "数码");
         itemTypes.put("102", "母婴");
+        itemTypes.put("103", "书籍");
+        itemTypes.put("104", "生活用品");
+        itemTypes.put("105", "家用电器");
 
         return itemTypes;
     }
